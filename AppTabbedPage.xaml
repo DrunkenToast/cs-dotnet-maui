@@ -1,0 +1,18 @@
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:cs_dotnet_maui"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            x:Class="cs_dotnet_maui.AppTabbedPage">
+    <NavigationPage Title="Crate" IconImageSource="{StaticResource Box}">
+        <x:Arguments>
+            <local:MainPage Title="Crate" />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Inventory" IconImageSource="{StaticResource Backpack}">
+        <x:Arguments>
+            <local:InventoryPage Title="Inventory" />
+        </x:Arguments>
+    </NavigationPage>
+
+</TabbedPage>
