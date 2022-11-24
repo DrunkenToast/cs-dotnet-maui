@@ -6,7 +6,7 @@
             x:Class="cs_dotnet_maui.AppTabbedPage">
     <NavigationPage Title="Crate" IconImageSource="{StaticResource Box}">
         <x:Arguments>
-            <local:MainPage Title="Crate" />
+            <local:CratePage Title="Crate" />
         </x:Arguments>
     </NavigationPage>
     <NavigationPage Title="Inventory" IconImageSource="{StaticResource Backpack}">
@@ -14,5 +14,4 @@
             <local:InventoryPage Title="Inventory" />
         </x:Arguments>
     </NavigationPage>
-
 </TabbedPage>
