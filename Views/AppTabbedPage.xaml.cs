@@ -1,4 +1,4 @@
-namespace cs_dotnet_maui;
+namespace cs_dotnet_maui.Views;
 
 public partial class AppTabbedPage : TabbedPage
 {

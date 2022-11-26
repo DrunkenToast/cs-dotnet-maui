@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cs_dotnet_maui.Views.InventoryPage"
+             Title="Inventory page"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:local="clr-namespace:cs_dotnet_maui.Views"
+             >
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}"
+             IsClippedToBounds="False"
+    >
+            <CollectionView ItemsSource="{Binding ItemList}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding selectedItem}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            >
+            <CollectionView.EmptyView>
+                <StackLayout Padding="50">
+                <Label Text="Imagine tumbleweeds crossing over the landscape"
+                       FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ItemCardView />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+    </RefreshView>
+</ContentPage>

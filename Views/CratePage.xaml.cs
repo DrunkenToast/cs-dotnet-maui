@@ -1,4 +1,4 @@
-﻿namespace cs_dotnet_maui;
+﻿namespace cs_dotnet_maui.Views;
 
 public class CrateViewModel {
 	private IDataStore _dataStore => DependencyService.Get<IDataStore>();
@@ -11,14 +11,13 @@ public class CrateViewModel {
 
 	public async void UnboxCrate()
 	{
-		Console.WriteLine("Unboxing!!");
-		await _nav.PushAsync(new ItemDetailsPage(new Item() { Id=1, Name="test", Quality=QualityType.Unique}) { Title = "yoinky sploinky"});
+		var it = await _dataStore.UnboxItemAsync();
+		await _nav.PushAsync(new ItemDetailsPage(it) { Title = "Unboxed a new item!"});
 	}
 }
 
 public partial class CratePage : ContentPage
 {
-	int count = 0;
 	CrateViewModel vm;
 
 	public CratePage()

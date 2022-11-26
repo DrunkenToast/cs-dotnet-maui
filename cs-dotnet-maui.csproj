@@ -57,22 +57,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\CratePage.xaml.cs">
+	  <Compile Update="Views\CratePage.xaml.cs">
 	    <DependentUpon>CratePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\ItemDetailsPage.xaml.cs">
+	  <Compile Update="Views\ItemDetailsPage.xaml.cs">
 	    <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\AppTabbedPage.xaml">
+	  <MauiXaml Update="Views\AppTabbedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\InventoryPage.xaml">
+	  <MauiXaml Update="Views\InventoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ItemDetailsPage.xaml">
+	  <MauiXaml Update="Views\ItemCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ItemDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
