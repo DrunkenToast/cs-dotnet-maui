@@ -3,8 +3,8 @@ namespace cs_dotnet_maui;
 
 static class Environment
 {
-    public const string baseUrl = "http://10.0.2.2:5121/";
-    //public const string baseUrl = "http://localhost:5121/";
+    //public const string baseUrl = "http://10.0.2.2:5121/";
+    public const string baseUrl = "http://localhost:5121/";
 }
 
 public partial class App : Application

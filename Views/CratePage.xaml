@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="cs_dotnet_maui.Views.CratePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout
@@ -15,10 +21,14 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
 
+
+            <ActivityIndicator IsRunning="{Binding IsUnboxing}" />
+
             <Button
                 Text="Unbox a crate"
                 SemanticProperties.Hint="Unboxes a crate"
                 Command="{Binding UnboxButtonCommand}"
+                IsEnabled="{Binding IsUnboxButtonEnabled}"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
