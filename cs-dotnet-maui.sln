@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs-dotnet-maui", "cs-dotnet-maui.csproj", "{24256DCE-9FDC-475D-ADE3-4D9D775AF0D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs-dotnet-maui-testing", "..\cs-dotnet-maui-testing\cs-dotnet-maui-testing.csproj", "{B53CE731-04CA-41EB-ABD0-C006600CD329}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{24256DCE-9FDC-475D-ADE3-4D9D775AF0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24256DCE-9FDC-475D-ADE3-4D9D775AF0D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24256DCE-9FDC-475D-ADE3-4D9D775AF0D9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B53CE731-04CA-41EB-ABD0-C006600CD329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53CE731-04CA-41EB-ABD0-C006600CD329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B53CE731-04CA-41EB-ABD0-C006600CD329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53CE731-04CA-41EB-ABD0-C006600CD329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

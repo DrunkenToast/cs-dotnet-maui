@@ -12,7 +12,7 @@ public class InventoryViewModel : ViewModelBase
 
 	public ObservableCollection<Item> ItemList { get; set; } = new ObservableCollection<Item>();
 	private Item _selectedItem { get; set; }
-	public Item selectedItem { 
+	public Item SelectedItem { 
 		get { return _selectedItem; }
 		set {  _selectedItem = value; OnPropertyChanged();  }
 	}
@@ -33,11 +33,11 @@ public class InventoryViewModel : ViewModelBase
 
 	private async void _openSelectedItem()
 	{
-		if (selectedItem != null)
+		if (SelectedItem != null)
 		{
-			await _nav.PushAsync(new ItemDetailsPage(selectedItem));
+			await _nav.PushAsync(new ItemDetailsPage(SelectedItem));
 			Console.WriteLine("test!");
-			selectedItem = null; //	unselect from UI
+			SelectedItem = null; //	unselect from UI
         }
     }
 
@@ -54,7 +54,7 @@ public class InventoryViewModel : ViewModelBase
 		// todo block refreshview
 		try
 		{
-            _updateItemList(await _dataStore.GetAllItemsAsync());
+            UpdateItemList(await _dataStore.GetAllItemsAsync());
 			Console.WriteLine(JsonSerializer.Serialize(ItemList));
         }
         catch (Exception ex) {
@@ -62,7 +62,7 @@ public class InventoryViewModel : ViewModelBase
 		}
 	}
 
-	private void _updateItemList(IEnumerable<Item> items)
+	public void UpdateItemList(IEnumerable<Item> items)
 	{
 		ItemList.Clear();
 
