@@ -12,7 +12,7 @@
     >
             <CollectionView ItemsSource="{Binding ItemList}"
                             SelectionMode="Single"
-                            SelectedItem="{Binding selectedItem}"
+                            SelectedItem="{Binding SelectedItem}"
                             SelectionChangedCommand="{Binding SelectionChangedCommand}"
                             >
             <CollectionView.EmptyView>
