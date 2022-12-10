@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cs_dotnet_maui.Views.ItemDetailsPage"
+             Title="Item details">
+    <VerticalStackLayout>
+        
+        <!--
+            <Label 
+                Text="{Binding Id}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        -->
+
+        <Label
+            FontSize="Medium"
+            TextColor="{Binding Color}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            >
+            <Label.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="Quality"/>
+                    <Binding Path="Name"/>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
+        <Button
+            Text="Delete item"
+            SemanticProperties.Hint="Deletes an item"
+            Command="{Binding DeleteButtonCommand}"
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

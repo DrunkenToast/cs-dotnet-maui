@@ -1,9 +1,9 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:local="clr-namespace:cs_dotnet_maui"
+            xmlns:local="clr-namespace:cs_dotnet_maui.Views"
             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            x:Class="cs_dotnet_maui.AppTabbedPage">
+            x:Class="cs_dotnet_maui.Views.AppTabbedPage">
     <NavigationPage Title="Crate" IconImageSource="{StaticResource Box}">
         <x:Arguments>
             <local:CratePage Title="Crate" />

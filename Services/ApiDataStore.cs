@@ -12,9 +12,12 @@ namespace cs_dotnet_maui
     {
         public List<Item> ItemList { get; set; }
 
-        public Task DeleteItemAsync(Item it)
+        public async Task DeleteItemAsync(Item it) //TODO: test
         {
-            throw new NotImplementedException();
+            HttpClient client = new();
+            await client.DeleteAsync(Environment.baseUrl + "items/" + it.Id);
+
+            return;
         }
 
         public async Task<List<Item>> GetAllItemsAsync()
@@ -24,18 +27,27 @@ namespace cs_dotnet_maui
 
             Console.WriteLine(json);
 
+            return _convertFromJson<List<Item>>(json);
+        }
+
+        public async Task<Item> UnboxItemAsync() //TODO: test
+        {
+            HttpClient client = new();
+            var res = await client.PostAsync(Environment.baseUrl + "items", null);
+            var json = await res.Content.ReadAsStringAsync();
+
+            Console.WriteLine(json);
+
+            return _convertFromJson<Item>(json);
+        }
+
+        private T _convertFromJson<T>(string json)
+        {
             var opt = new JsonSerializerOptions {
                 PropertyNameCaseInsensitive = true
             };
 
-            ItemList = JsonSerializer.Deserialize<List<Item>>(json, opt);
-
-            return ItemList;
-        }
-
-        public Task<Item> UnboxItemAsync()
-        {
-            throw new NotImplementedException();
+            return JsonSerializer.Deserialize<T>(json, opt);
         }
     }
 }
