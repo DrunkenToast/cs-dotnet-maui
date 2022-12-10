@@ -11,8 +11,8 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
+            Spacing="10"
+            Padding="10,0"
             VerticalOptions="Center">
 
             <Label
@@ -20,6 +20,10 @@
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
+
+            <Image 
+                Source="crate.png"
+                HeightRequest="350"/>
 
 
             <ActivityIndicator IsRunning="{Binding IsUnboxing}" />
