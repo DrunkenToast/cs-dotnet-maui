@@ -16,6 +16,11 @@
                Size="22"
                Color="{StaticResource Primary}"
                Glyph="{x:Static local:IconFont.BoxesStacked}"/>
+    <FontImage x:Key="Coins"
+               FontFamily="FontAwesome"
+               Size="22"
+               Color="{StaticResource Primary}"
+               Glyph="{x:Static local:IconFont.Coins}"/>
 
 
     <Style TargetType="ActivityIndicator">

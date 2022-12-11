@@ -1,14 +1,23 @@
-﻿namespace cs_dotnet_maui.Views;
+﻿using cs_dotnet_maui.Exceptions;
+
+namespace cs_dotnet_maui.Views;
 
 public class CrateViewModel : ViewModelBase {
 	private IDataStore _dataStore => DependencyService.Get<IDataStore>();
 	public Command UnboxButtonCommand { get; }
 	private INavigation _nav;
 	private ContentPage _page;
+
 	public Boolean _isUnboxButtonEnabled = true;
 	public Boolean IsUnboxButtonEnabled { 
 		get { return _isUnboxButtonEnabled; }
 		set {  _isUnboxButtonEnabled = value; OnPropertyChanged();  }
+	}
+
+	private int _keys = 0;
+	public int Keys { 
+		get { return _keys; }
+		set { _keys = value; OnPropertyChanged();  }
 	}
 	public CrateViewModel(INavigation nav, ContentPage page) {
 		//UnboxButtonCommand = new Command(UnboxCrate);
@@ -30,9 +39,15 @@ public class CrateViewModel : ViewModelBase {
 			IsUnboxButtonEnabled = false;
             var it = await _dataStore.UnboxItemAsync();
 			IsUnboxButtonEnabled = true;
+			RefreshKeyAmount(); // Technically not necessary since when we return from the other page it will also return
             await _nav.PushAsync(new ItemDetailsPage(it) { Title = "Unboxed a new item!" });
         }
-        catch (Exception)
+        catch (NoKeysException)
+        {
+			await _page.DisplayAlert("Not enough keys...", "This world ain't free, chap", "Darn...");
+			//TODO button redirect
+        }
+        catch
         {
 			await _page.DisplayAlert("Unbox failed :((", "Something went wrong with unboxing the crate :(", "Darn...");
         }
@@ -41,20 +56,36 @@ public class CrateViewModel : ViewModelBase {
 			IsUnboxButtonEnabled = true;
 		}
     }
+
+	public async void RefreshKeyAmount()
+	{
+		try
+		{
+            Keys = await _dataStore.GetKeysAmount();
+        }
+		catch
+		{
+			await _page.DisplayAlert("Where did the keys go?", "Request failed to get the key amount. Now where did I put them...", "Darn...");
+		}
+
+    }
 }
 
 public partial class CratePage : ContentPage
 {
-	CrateViewModel vm;
+	CrateViewModel _vm;
 
 	public CratePage()
 	{
 		InitializeComponent();
-		BindingContext = vm = new CrateViewModel(Navigation, this);
+		BindingContext = _vm = new CrateViewModel(Navigation, this);
+		Appearing += CratePageAppearing;
     }
 
-    private void _unboxClicked(object sender, EventArgs e)
+	private void CratePageAppearing(object sender, EventArgs e)
 	{
+		Console.WriteLine("Enter crate page");
+		_vm.RefreshKeyAmount();
 	}
 }
 

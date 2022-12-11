@@ -14,4 +14,9 @@
             <local:InventoryPage Title="Inventory" />
         </x:Arguments>
     </NavigationPage>
+    <NavigationPage Title="Mann Co." IconImageSource="{StaticResource Coins}">
+        <x:Arguments>
+            <local:ShopPage Title="Mann Co." />
+        </x:Arguments>
+    </NavigationPage>
 </TabbedPage>

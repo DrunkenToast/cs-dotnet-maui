@@ -18,13 +18,28 @@
             <Label
                 Text="Unbox an epic crate???"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
+                FontSize="48"
                 HorizontalOptions="Center" />
 
             <Image 
                 Source="crate.png"
                 HeightRequest="350"/>
 
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Image 
+                    Source="key.png"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label
+                    Text="{Binding Keys}"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
             <ActivityIndicator IsRunning="{Binding IsUnboxing}" />
 
