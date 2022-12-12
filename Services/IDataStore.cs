@@ -12,5 +12,7 @@ namespace cs_dotnet_maui
         Task<List<Item>> GetAllItemsAsync();
         Task<Item> UnboxItemAsync();
         Task DeleteItemAsync(Item it);
+        Task<int> GetKeysAmount();
+        Task<int> PurchaseKey(int amount);
     }
 }
