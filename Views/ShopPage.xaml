@@ -20,11 +20,30 @@
                     VerticalOptions="Center"/>
         </HorizontalStackLayout>
 
+            <Label
+                    Text="{Binding Path=PriceKey, StringFormat='A key is only €{0:f2}'}"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="24"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+
         <Button
             Text="Buy, one singular, measly key"
             SemanticProperties.Hint="Buy 1 key"
             Command="{Binding BuyCommand}"
             CommandParameter="1"
+            HorizontalOptions="Center" />
+        <Button
+            Text="Buy a small bag of 5 keys!"
+            SemanticProperties.Hint="Buy 5 key"
+            Command="{Binding BuyCommand}"
+            CommandParameter="5"
+            HorizontalOptions="Center" />
+        <Button
+            Text="Buy a whole crate of 25 keys!"
+            SemanticProperties.Hint="Buy 25 key"
+            Command="{Binding BuyCommand}"
+            CommandParameter="25"
             HorizontalOptions="Center" />
 
 

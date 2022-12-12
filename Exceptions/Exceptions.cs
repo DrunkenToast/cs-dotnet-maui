@@ -10,9 +10,4 @@ namespace cs_dotnet_maui.Exceptions
     {
         public NoKeysException(string message) : base(message) {}
     }
-    public class InvalidFundsException : Exception
-    {
-        public InvalidFundsException(string message) : base(message) {}
-    }
-
 }

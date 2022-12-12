@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using cs_dotnet_maui.Exceptions;
@@ -14,7 +16,6 @@ namespace cs_dotnet_maui
     internal class ApiDataStore : IDataStore
     {
         public List<Item> ItemList { get; set; }
-        private readonly float _price_key = 2.49F;
 
         public async Task DeleteItemAsync(Item it)
         {
@@ -72,13 +73,14 @@ namespace cs_dotnet_maui
         public async Task<int> PurchaseKey(int amount)
         {
             HttpClient client = new();
-            var money = amount * _price_key;
-            var data = $"{{'money': {amount}}}";
-            Console.WriteLine($"Data sent: {data}");
-            var content = new StringContent(data, Encoding.UTF8, "application/json");
+            var jsonObj = new JsonObject();
+            jsonObj.Add("amount", amount);
+            var content = new StringContent(jsonObj.ToString(), Encoding.UTF8, "application/json");
 
-            var res = await client.PostAsync(Environment.baseUrl + "keys", content);
+            var res = await client.PostAsync(Environment.baseUrl + "purchase", content);
+
             res.EnsureSuccessStatusCode();
+
             var json = await res.Content.ReadAsStringAsync();
             var keys = _convertFromJson<Keys>(json);
 

@@ -39,7 +39,7 @@ public class CrateViewModel : ViewModelBase {
 			IsUnboxButtonEnabled = false;
             var it = await _dataStore.UnboxItemAsync();
 			IsUnboxButtonEnabled = true;
-			RefreshKeyAmount(); // Technically not necessary since when we return from the other page it will also return
+			RefreshKeyAmountAsync(); // Technically not necessary since when we return from the other page it will also return
             await _nav.PushAsync(new ItemDetailsPage(it) { Title = "Unboxed a new item!" });
         }
         catch (NoKeysException)
@@ -57,7 +57,7 @@ public class CrateViewModel : ViewModelBase {
 		}
     }
 
-	public async void RefreshKeyAmount()
+	public async void RefreshKeyAmountAsync()
 	{
 		try
 		{
@@ -85,7 +85,7 @@ public partial class CratePage : ContentPage
 	private void CratePageAppearing(object sender, EventArgs e)
 	{
 		Console.WriteLine("Enter crate page");
-		_vm.RefreshKeyAmount();
+		_vm.RefreshKeyAmountAsync();
 	}
 }
 
