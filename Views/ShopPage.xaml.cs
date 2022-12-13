@@ -38,8 +38,8 @@ public class ShopViewModel : ViewModelBase
 			try
 			{
                 await _dataStore.PurchaseKey(amt);
-                await _page.DisplayAlert("THANKS!!!", "Your poor life decision went through. Come back any time!", "Yay!");
 				RefreshKeyAmountAsync();
+                await _page.DisplayAlert("THANKS!!!", "Your poor life decision went through. Come back any time!", "Yay!");
             }
 			catch
 			{

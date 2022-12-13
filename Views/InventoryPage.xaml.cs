@@ -8,7 +8,7 @@ namespace cs_dotnet_maui.Views;
 public class InventoryViewModel : ViewModelBase 
 {
 	private IDataStore _dataStore => DependencyService.Get<IDataStore>();
-	private INavigation _nav;
+	private InventoryPage _page;
 
 	public ObservableCollection<Item> ItemList { get; set; } = new ObservableCollection<Item>();
 	private Item _selectedItem { get; set; }
@@ -24,8 +24,8 @@ public class InventoryViewModel : ViewModelBase
 		get { return _isRefreshing; }
 		set { _isRefreshing = value; OnPropertyChanged(); }
 	}
-	public InventoryViewModel(INavigation nav) {
-		_nav = nav;
+	public InventoryViewModel(InventoryPage page) {
+		_page = page;
 		SelectionChangedCommand = new Command(_openSelectedItem);
 		RefreshCommand = new Command(RefreshAsync);
         _ = _updateAllItemsAsync(); // Just refresh
@@ -35,7 +35,7 @@ public class InventoryViewModel : ViewModelBase
 	{
 		if (SelectedItem != null)
 		{
-			await _nav.PushAsync(new ItemDetailsPage(SelectedItem));
+			await _page.Navigation.PushAsync(new ItemDetailsPage(SelectedItem));
 			Console.WriteLine("test!");
 			SelectedItem = null; //	unselect from UI
         }
@@ -57,8 +57,9 @@ public class InventoryViewModel : ViewModelBase
             UpdateItemList(await _dataStore.GetAllItemsAsync());
 			Console.WriteLine(JsonSerializer.Serialize(ItemList));
         }
-        catch (Exception ex) {
-			// TODO: handle error
+        catch {
+			ItemList.Clear();
+			await _page.DisplayAlert("It's hiding somewhere...", "Couldn't get ya items, request failed.", "Darn...");
 		}
 	}
 
@@ -81,7 +82,7 @@ public partial class InventoryPage : ContentPage
 		InitializeComponent();
         Appearing += InventoryPage_Appearing;
 
-		BindingContext = vm = new InventoryViewModel(Navigation);
+		BindingContext = vm = new InventoryViewModel(this);
 	}
 
     private void InventoryPage_Appearing(object sender, EventArgs e)
