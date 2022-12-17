@@ -24,7 +24,6 @@ public class ShopViewModel : ViewModelBase
 
 	public async void BuyAction(string amount)
 	{
-		Debug.WriteLine(amount);
 		if (int.TryParse(amount, out int amt))
 		{
 			bool answer = await _page.DisplayAlert(
@@ -32,14 +31,13 @@ public class ShopViewModel : ViewModelBase
 				"Yes take my money!!!",
 				"On second thought..."
             );
-            Debug.WriteLine("Answer: " + answer);
 			if (!answer) return;
 
 			try
 			{
                 await _dataStore.PurchaseKey(amt);
-                await _page.DisplayAlert("THANKS!!!", "Your poor life decision went through. Come back any time!", "Yay!");
 				RefreshKeyAmountAsync();
+                await _page.DisplayAlert("THANKS!!!", "Your poor life decision went through. Come back any time!", "Yay!");
             }
 			catch
 			{
@@ -75,7 +73,6 @@ public partial class ShopPage : ContentPage
 	
 	private void ShopPageAppearing(object sender, EventArgs e)
 	{
-		Console.WriteLine("Enter shop page");
 		_vm.RefreshKeyAmountAsync();
 	}
 }
