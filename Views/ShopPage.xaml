@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="cs_dotnet_maui.Views.ShopPage"
              Title="ShopPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Spacing="5">
         <HorizontalStackLayout
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
@@ -20,12 +21,12 @@
                     VerticalOptions="Center"/>
         </HorizontalStackLayout>
 
-            <Label
-                    Text="{Binding Path=PriceKey, StringFormat='A key is only €{0:f2}'}"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="24"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+        <Label
+            Text="{Binding Path=PriceKey, StringFormat='A key is only €{0:f2}'}"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="24"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
 
         <Button
             Text="Buy, one singular, measly key"
@@ -45,7 +46,6 @@
             Command="{Binding BuyCommand}"
             CommandParameter="25"
             HorizontalOptions="Center" />
-
 
     </VerticalStackLayout>
 </ContentPage>
