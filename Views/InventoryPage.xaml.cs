@@ -53,8 +53,8 @@ public class InventoryViewModel : ViewModelBase
 		{
             UpdateItemList(await _dataStore.GetAllItemsAsync());
         }
-        catch (Exception ex) {
-			await _page.DisplayAlert("Where did I put them?", "Couldn't load your items", "Darn...")
+        catch {
+			await _page.DisplayAlert("Where did I put them?", "Couldn't load your items", "Darn...");
 		}
 	}
 
