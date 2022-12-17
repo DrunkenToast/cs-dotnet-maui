@@ -8,7 +8,7 @@ namespace cs_dotnet_maui.Views;
 public class InventoryViewModel : ViewModelBase 
 {
 	private IDataStore _dataStore => DependencyService.Get<IDataStore>();
-	private INavigation _nav;
+	private InventoryPage _page;
 
 	public ObservableCollection<Item> ItemList { get; set; } = new ObservableCollection<Item>();
 	private Item _selectedItem { get; set; }
@@ -24,8 +24,8 @@ public class InventoryViewModel : ViewModelBase
 		get { return _isRefreshing; }
 		set { _isRefreshing = value; OnPropertyChanged(); }
 	}
-	public InventoryViewModel(INavigation nav) {
-		_nav = nav;
+	public InventoryViewModel(InventoryPage page) {
+		_page = page;
 		SelectionChangedCommand = new Command(_openSelectedItem);
 		RefreshCommand = new Command(RefreshAsync);
         _ = _updateAllItemsAsync(); // Just refresh
@@ -35,15 +35,13 @@ public class InventoryViewModel : ViewModelBase
 	{
 		if (SelectedItem != null)
 		{
-			await _nav.PushAsync(new ItemDetailsPage(SelectedItem));
-			Console.WriteLine("test!");
+			await _page.Navigation.PushAsync(new ItemDetailsPage(SelectedItem));
 			SelectedItem = null; //	unselect from UI
         }
     }
 
     public async void RefreshAsync()
 	{
-		Console.WriteLine("yo?");
 		IsRefreshing = true;
         await _updateAllItemsAsync();
         IsRefreshing = false;
@@ -51,14 +49,12 @@ public class InventoryViewModel : ViewModelBase
 
 	private async Task _updateAllItemsAsync()
 	{
-		// todo block refreshview
 		try
 		{
             UpdateItemList(await _dataStore.GetAllItemsAsync());
-			Console.WriteLine(JsonSerializer.Serialize(ItemList));
         }
         catch (Exception ex) {
-			// TODO: handle error
+			await _page.DisplayAlert("Where did I put them?", "Couldn't load your items", "Darn...")
 		}
 	}
 
@@ -79,14 +75,13 @@ public partial class InventoryPage : ContentPage
 	public InventoryPage()
 	{
 		InitializeComponent();
-        Appearing += InventoryPage_Appearing;
+        Appearing += InventoryPageAppearing;
 
-		BindingContext = vm = new InventoryViewModel(Navigation);
+		BindingContext = vm = new InventoryViewModel(this);
 	}
 
-    private void InventoryPage_Appearing(object sender, EventArgs e)
+    private void InventoryPageAppearing(object sender, EventArgs e)
     {
-		Console.WriteLine("Enter inventory page");
 		vm.RefreshAsync();
     }
 }

@@ -20,7 +20,6 @@ public class CrateViewModel : ViewModelBase {
 		set { _keys = value; OnPropertyChanged();  }
 	}
 	public CrateViewModel(INavigation nav, ContentPage page) {
-		//UnboxButtonCommand = new Command(UnboxCrate);
 		UnboxButtonCommand = new Command(UnboxCrate, CanClickUnbox);
         _nav = nav;
 		_page = page;
@@ -28,7 +27,6 @@ public class CrateViewModel : ViewModelBase {
 
     private bool CanClickUnbox(object arg)
     {
-        Console.WriteLine($"CanClick called! IsButtonEnabled: {!IsUnboxButtonEnabled}");
         return !IsUnboxButtonEnabled;
     }
 
@@ -44,8 +42,7 @@ public class CrateViewModel : ViewModelBase {
         }
         catch (NoKeysException)
         {
-			await _page.DisplayAlert("Not enough keys...", "This world ain't free, chap", "Darn...");
-			//TODO button redirect
+			await _page.DisplayAlert("Not enough keys...", "This world ain't free, chap. You can buy keys in the shop.", "Darn...");
         }
         catch
         {
@@ -84,7 +81,6 @@ public partial class CratePage : ContentPage
 
 	private void CratePageAppearing(object sender, EventArgs e)
 	{
-		Console.WriteLine("Enter crate page");
 		_vm.RefreshKeyAmountAsync();
 	}
 }

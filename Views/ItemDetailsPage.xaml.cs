@@ -3,6 +3,7 @@ public class ItemDetailViewModel : ViewModelBase
 {
 	private IDataStore _dataStore => DependencyService.Get<IDataStore>();
 	public Command DeleteButtonCommand { get; }
+	public Command BackButtonCommand{ get; }
 	private Item _item;
 	private ContentPage _page;
 	public int Id { 
@@ -25,9 +26,10 @@ public class ItemDetailViewModel : ViewModelBase
 
 	public ItemDetailViewModel(Item it, ContentPage page)
 	{
-		DeleteButtonCommand = new Command(_deleteItem);
 		_item = it;
 		_page = page;
+		DeleteButtonCommand = new Command(_deleteItem);
+		BackButtonCommand = new Command(() => _page.Navigation.PopAsync());
 	}
 	private async void _deleteItem(object arg)
 	{
@@ -39,10 +41,6 @@ public class ItemDetailViewModel : ViewModelBase
 		catch (Exception)
 		{
 			await _page.DisplayAlert("Delete failed :((", "Something went wrong with scraping the item :(", "Darn...");
-		}
-		finally
-		{
-			// TODO: turn off button
 		}
     }
 }

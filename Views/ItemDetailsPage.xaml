@@ -3,17 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="cs_dotnet_maui.Views.ItemDetailsPage"
              Title="Item details">
-    <VerticalStackLayout>
-        
-        <!--
-            <Label 
-                Text="{Binding Id}"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-        -->
+    <VerticalStackLayout Spacing="5">
 
         <Label
-            FontSize="Medium"
+            FontSize="Large"
+            FontAttributes="Bold"
             TextColor="{Binding Color}"
             VerticalOptions="Center"
             HorizontalOptions="Center"
@@ -26,10 +20,23 @@
             </Label.Text>
         </Label>
 
+        <Label 
+            Text="{Binding Id, StringFormat='Item #{0}'}"
+            TextColor="Gray"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
         <Button
             Text="Delete item"
             SemanticProperties.Hint="Deletes an item"
+            BackgroundColor="OrangeRed"
             Command="{Binding DeleteButtonCommand}"
+            HorizontalOptions="Center" />
+
+        <Button
+            Text="Back"
+            SemanticProperties.Hint="Go back"
+            Command="{Binding BackButtonCommand}"
             HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
