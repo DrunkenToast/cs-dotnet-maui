@@ -32,12 +32,10 @@ namespace cs_dotnet_maui
             HttpClient client = new();
             String json = await client.GetStringAsync(Environment.baseUrl + "items");
 
-            Console.WriteLine(json);
-
             return _convertFromJson<List<Item>>(json);
         }
 
-        public async Task<Item> UnboxItemAsync() //TODO: test
+        public async Task<Item> UnboxItemAsync()
         {
             HttpClient client = new();
             var res = await client.PostAsync(Environment.baseUrl + "items", null);
@@ -50,8 +48,6 @@ namespace cs_dotnet_maui
             res.EnsureSuccessStatusCode();
 
             var json = await res.Content.ReadAsStringAsync();
-
-            Console.WriteLine(json);
 
             return _convertFromJson<Item>(json);
         }
